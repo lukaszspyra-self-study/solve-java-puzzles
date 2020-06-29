@@ -1,4 +1,4 @@
-package answers.strings;
+package puzzles.strings;
 
 import org.junit.jupiter.api.Test;
 

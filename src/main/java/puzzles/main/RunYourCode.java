@@ -1,11 +1,9 @@
-package org.example;
-
-import answers.strings.StringTasks;
+package puzzles.main;
 
 /**
  * Hello world!
  */
-public class App {
+public class RunYourCode {
 
 
     public static void main(String[] args) {
