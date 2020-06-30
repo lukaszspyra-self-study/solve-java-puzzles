@@ -107,6 +107,8 @@ class StringTasksTest {
         String word3 = "ęłófdł";
         String word4 = "";
         String word5 = null;
+        String word6 = "  ";
+        String word7 = "__";
 
         //Then
         assertAll(
@@ -114,7 +116,9 @@ class StringTasksTest {
                 () -> assertTrue(stringTasks.checkRepeatableLetters1stVersion(word2)),
                 () -> assertTrue(stringTasks.checkRepeatableLetters1stVersion(word3)),
                 () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word4)),
-                () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word5))
+                () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word5)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word6)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word7))
         );
 
     }
@@ -131,6 +135,8 @@ class StringTasksTest {
         String word3 = "ęłófdł";
         String word4 = "";
         String word5 = null;
+        String word6 = "  ";
+        String word7 = "__";
 
         //Then
         assertAll(
@@ -138,7 +144,9 @@ class StringTasksTest {
                 () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word2)),
                 () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word3)),
                 () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word4)),
-                () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word5))
+                () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word5)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word6)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word7))
         );
 
     }

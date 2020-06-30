@@ -1,7 +1,6 @@
 package puzzles.strings;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StringTasks {
@@ -37,5 +36,27 @@ public class StringTasks {
         return characterList.size() != chars.length;
     }
 
+    public boolean checkRepeatableLetters2ndVersion(String word){
+
+        if (word == null || word.isEmpty()) {
+            return false;
+        }
+
+        char[] chars = word.toCharArray();
+
+        List<Character> characterList = new ArrayList<>();
+
+        for (Character c : chars){
+
+            if (characterList.contains(c)){
+                return true;
+            }
+
+            characterList.add(c);
+
+        }
+
+        return false;
+    }
 
 }
