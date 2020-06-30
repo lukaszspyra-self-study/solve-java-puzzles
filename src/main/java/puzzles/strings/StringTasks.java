@@ -15,4 +15,11 @@ public class StringTasks {
 
     }
 
+
+    public boolean checkRepeatableLetters(String word){
+
+
+        return false;
+    }
+
 }

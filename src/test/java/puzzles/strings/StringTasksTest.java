@@ -2,8 +2,7 @@ package puzzles.strings;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class StringTasksTest {
@@ -96,5 +95,27 @@ class StringTasksTest {
         );
     }
 
+    @Test
+    void testCheckRepeatableLetters() {
 
+        //Having
+        StringTasks stringTasks = new StringTasks();
+
+        //When
+        String word1 = "adcfg";
+        String word2 = "abndka";
+        String word3 = "ęłófdł";
+        String word4 = "";
+        String word5 = null;
+
+        //Then
+        assertAll(
+                () -> assertFalse(stringTasks.checkRepeatableLetters(word1)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters(word2)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters(word3)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters(word4)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters(word5))
+        );
+
+    }
 }
