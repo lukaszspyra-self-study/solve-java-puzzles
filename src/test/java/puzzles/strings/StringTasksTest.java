@@ -96,7 +96,7 @@ class StringTasksTest {
     }
 
     @Test
-    void testCheckRepeatableLetters() {
+    void testCheckRepeatableLetters1stVersion() {
 
         //Having
         StringTasks stringTasks = new StringTasks();
@@ -110,11 +110,11 @@ class StringTasksTest {
 
         //Then
         assertAll(
-                () -> assertFalse(stringTasks.checkRepeatableLetters(word1)),
-                () -> assertTrue(stringTasks.checkRepeatableLetters(word2)),
-                () -> assertTrue(stringTasks.checkRepeatableLetters(word3)),
-                () -> assertFalse(stringTasks.checkRepeatableLetters(word4)),
-                () -> assertFalse(stringTasks.checkRepeatableLetters(word5))
+                () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word1)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters1stVersion(word2)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters1stVersion(word3)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word4)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters1stVersion(word5))
         );
 
     }
