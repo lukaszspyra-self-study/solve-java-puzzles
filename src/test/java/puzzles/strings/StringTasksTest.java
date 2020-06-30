@@ -118,4 +118,28 @@ class StringTasksTest {
         );
 
     }
+
+    @Test
+    void testCheckRepeatableLetters2ndVersion() {
+
+        //Having
+        StringTasks stringTasks = new StringTasks();
+
+        //When
+        String word1 = "adcfg";
+        String word2 = "abndka";
+        String word3 = "ęłófdł";
+        String word4 = "";
+        String word5 = null;
+
+        //Then
+        assertAll(
+                () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word1)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word2)),
+                () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word3)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word4)),
+                () -> assertFalse(stringTasks.checkRepeatableLetters2ndVersion(word5))
+        );
+
+    }
 }
