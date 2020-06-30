@@ -60,8 +60,35 @@ public class StringTasks {
         return false;
     }
 
+
     public Map<String, Integer> countAllOccurrencesOfLetters(String word){
         Map<String, Integer> letters = new HashMap<>();
+
+        if (word == null || word.isEmpty()){
+            return letters;
+        }
+
+        char[] chars = word.toCharArray();
+        List<String> stringList = new ArrayList<>();
+
+        for (char c : chars){
+            stringList.add(String.valueOf(c).toLowerCase());
+        }
+
+
+        Integer mapValue = 0;
+
+        for (String s : stringList){
+
+            if (!letters.containsKey(s)){
+
+                letters.put(s, 1);
+
+            } else {
+                mapValue = letters.get(s) + 1;
+                letters.put(s, mapValue);
+            }
+        }
 
         return letters;
 

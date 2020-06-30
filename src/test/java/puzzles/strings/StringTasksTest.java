@@ -165,7 +165,7 @@ class StringTasksTest {
         Map<String, Integer> map1 = new HashMap<>();
         map1.put("a", 1);
         map1.put("d", 1);
-        map1.put("ac", 1);
+        map1.put("c", 1);
 
 
         String word2 = "_Ab.ęa";
