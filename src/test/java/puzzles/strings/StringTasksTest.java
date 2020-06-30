@@ -2,6 +2,9 @@ package puzzles.strings;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -149,5 +152,50 @@ class StringTasksTest {
                 () -> assertTrue(stringTasks.checkRepeatableLetters2ndVersion(word7))
         );
 
+    }
+
+    @Test
+    void countAllOccurrencesOfLetters() {
+
+        //Having
+        StringTasks stringTasks = new StringTasks();
+
+        //When
+        String word1 = "aDc";
+        Map<String, Integer> map1 = new HashMap<>();
+        map1.put("a", 1);
+        map1.put("d", 1);
+        map1.put("ac", 1);
+
+
+        String word2 = "_Ab.ęa";
+        Map<String, Integer> map2 = new HashMap<>();
+        map2.put("_", 1);
+        map2.put("a", 2);
+        map2.put("b", 1);
+        map2.put(".", 1);
+        map2.put("ę", 1);
+
+
+        String word3 = "  ";
+        Map<String, Integer> map3 = new HashMap<>();
+        map3.put(" ", 2);
+
+
+        String word4 = "";
+        Map<String, Integer> map4 = new HashMap<>();
+
+        String word5 = null;
+        Map<String, Integer> map5 = new HashMap<>();
+
+
+        //Then
+        assertAll(
+                () -> assertTrue(stringTasks.countAllOccurrencesOfLetters(word1).equals(map1)),
+                () -> assertTrue(stringTasks.countAllOccurrencesOfLetters(word2).equals(map2)),
+                () -> assertTrue(stringTasks.countAllOccurrencesOfLetters(word3).equals(map3)),
+                () -> assertTrue(stringTasks.countAllOccurrencesOfLetters(word4).equals(map4)),
+                () -> assertTrue(stringTasks.countAllOccurrencesOfLetters(word5).equals(map5))
+        );
     }
 }

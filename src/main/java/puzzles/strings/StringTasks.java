@@ -36,6 +36,7 @@ public class StringTasks {
         return characterList.size() != chars.length;
     }
 
+
     public boolean checkRepeatableLetters2ndVersion(String word){
 
         if (word == null || word.isEmpty()) {
@@ -57,6 +58,13 @@ public class StringTasks {
         }
 
         return false;
+    }
+
+    public Map<String, Integer> countAllOccurrencesOfLetters(String word){
+        Map<String, Integer> letters = new HashMap<>();
+
+        return letters;
+
     }
 
 }
