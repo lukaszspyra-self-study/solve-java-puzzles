@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AlgorithmsTest {
 
     @Test
-    void findBiggestDivisorFor12and6() {
+    void shouldFindBiggestDivisorFor12and6() {
         //given
         Algorithms algorithms = new Algorithms();
 
@@ -19,7 +19,7 @@ class AlgorithmsTest {
     }
 
     @Test
-    void findBiggestDivisorFor192and348() {
+    void shouldFindBiggestDivisorFor192and348() {
         //given
         Algorithms algorithms = new Algorithms();
 
@@ -31,7 +31,7 @@ class AlgorithmsTest {
     }
 
     @Test
-    void findBiggestDivisorFor77and55() {
+    void shouldFindBiggestDivisorFor77and55() {
         //given
         Algorithms algorithms = new Algorithms();
 
@@ -43,7 +43,7 @@ class AlgorithmsTest {
     }
 
     @Test
-    void findBiggestDivisorForPrimes11and7() {
+    void shouldFindBiggestDivisorForPrimes11and7() {
         //given
         Algorithms algorithms = new Algorithms();
 
@@ -55,7 +55,7 @@ class AlgorithmsTest {
     }
 
     @Test
-    void findBiggestDivisorForPrimes12329and22039() {
+    void shouldFindBiggestDivisorForPrimes12329and22039() {
         //given
         Algorithms algorithms = new Algorithms();
 
@@ -65,4 +65,20 @@ class AlgorithmsTest {
         //then
         assertEquals(1, biggestDivisor);
     }
+
+    @Test
+    void shouldNotAcceptNumberOutOfScope() {
+        //given
+        Algorithms algorithms = new Algorithms();
+
+        //when
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> algorithms.findBiggestDivisor(0, 22039));
+
+        //then
+        assertEquals("Wrong number input", exception.getMessage());
+    }
+
+
 }
