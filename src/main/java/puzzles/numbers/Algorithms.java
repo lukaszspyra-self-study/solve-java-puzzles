@@ -49,8 +49,6 @@ public class Algorithms {
 
         int difference;
 
-        if (number1 > number2) {
-
             while (number2 != 0) {
 
                 difference = number1 % number2;
@@ -60,19 +58,6 @@ public class Algorithms {
 
             return number1;
 
-        } else {
-
-            while (number1 != 0) {
-
-                difference = number2 % number1;
-                number2 = number1;
-                number1 = difference;
-
-            }
-
-            return number2;
-
-        }
     }
 
 }
