@@ -19,14 +19,14 @@ class AlgorithmsTest {
     }
 
     @Test
-    void findBiggestDivisorFor0and6() {
+    void findBiggestDivisorFor192and348() {
         //given
         Algorithms algorithms = new Algorithms();
 
         //when
-        int biggestDivisor = algorithms.findBiggestDivisor(12, 6);
+        int biggestDivisor = algorithms.findBiggestDivisor(192, 348);
 
         //then
-        assertEquals(6, biggestDivisor);
+        assertEquals(12, biggestDivisor);
     }
 }
