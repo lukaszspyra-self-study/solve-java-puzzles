@@ -3,7 +3,7 @@ package puzzles.numbers;
 public class Algorithms {
 
 
-    /** Finds biggest common int divisor of two natural numbers, using Euclidean algorithm - version with '-' operator
+    /** Finds biggest common int divisor of two natural numbers excluding 0, using Euclidean algorithm - version with '-' operator
      *
      * Creats
      * @param number1 as int
@@ -13,7 +13,22 @@ public class Algorithms {
 
     public int findBiggestDivisor(int number1, int number2){
 
-        return 0;
+        int difference;
+
+        if (number1 > number2){
+
+            difference = number1 - number2;
+
+        } else if(number1 == number2) {
+
+            return number1;
+
+        } else {
+            difference = number2 - number1;
+        }
+
+
+        return difference;
     }
 
 
