@@ -14,6 +14,10 @@ public class Algorithms {
 
     public int findBiggestDivisor(int number1, int number2) {
 
+        if (number1 == 1 || number2 < 1){
+            throw new IllegalArgumentException("Wrong number input");
+        }
+
         int difference;
 
         if (number1 > number2) {
