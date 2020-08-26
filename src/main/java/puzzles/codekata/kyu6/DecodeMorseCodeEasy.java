@@ -36,8 +36,27 @@ public class DecodeMorseCodeEasy {
 
     Good luck!*/
 
+    public static String decode(String morseCode) {
+        // your brilliant code here, remember that you can access the preloaded Morse code table through MorseCode.get(code)
+        StringBuilder builder = new StringBuilder();
+        String[] words = morseCode.strip().split("   ");
+
+        for (String word : words) {
+
+            String[] letters = word.split(" ");
+
+            for (String letter : letters) {
+                //builder.append(MorseCode.get(letter));
+            }
+
+            builder.append(" ");
+
+        }
+
+        return builder.substring(0, builder.length() - 1);
 
 
+    }
 
 
 }
