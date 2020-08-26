@@ -1,5 +1,8 @@
 package puzzles.codekata.kyu6;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class DecodeMorseCodeEasy {
 
 /*    Part of Series 1/3
@@ -36,27 +39,39 @@ public class DecodeMorseCodeEasy {
 
     Good luck!*/
 
-    public static String decode(String morseCode) {
-        // your brilliant code here, remember that you can access the preloaded Morse code table through MorseCode.get(code)
+    private static final String WORD_DELIMITER = "   ";
+    private static final String CHAR_DELIMITER = " ";
+
+
+    public static String decodeUsingLoops(String morseCode) {
         StringBuilder builder = new StringBuilder();
-        String[] words = morseCode.strip().split("   ");
+
+        String[] words = morseCode.strip().split(WORD_DELIMITER);
 
         for (String word : words) {
 
-            String[] letters = word.split(" ");
+            String[] letters = word.split(CHAR_DELIMITER);
 
             for (String letter : letters) {
+                // you can access the preloaded Morse code table through MorseCode.get(code)
                 //builder.append(MorseCode.get(letter));
             }
 
             builder.append(" ");
 
         }
-
         return builder.substring(0, builder.length() - 1);
-
-
     }
 
+    public static String decodeUsingStreams(String morseCode) {
+        String[] words = morseCode.strip().split(WORD_DELIMITER);
 
+        return Arrays.stream(words)
+                .map(a -> Arrays.stream(a.split(CHAR_DELIMITER))
+                        // you can access the preloaded Morse code table through MorseCode.get(code)
+                        //.map(b -> MorseCode.get(b))
+                        .collect(Collectors.joining()))
+                .collect(Collectors.joining(CHAR_DELIMITER))
+                .trim();
+    }
 }
