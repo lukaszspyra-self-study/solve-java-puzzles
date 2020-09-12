@@ -12,6 +12,7 @@ public class WarGame {
     private boolean player1Turn;
     private final List<Card> table;
     private final GameAssistant gameAssistant;
+    private int counter;
 
 
     public WarGame() {
@@ -21,6 +22,7 @@ public class WarGame {
         player1Turn = true;
         table = new ArrayList<>();
         gameAssistant = new GameAssistant();
+        counter = 0;
 
     }
 
@@ -113,11 +115,11 @@ public class WarGame {
 
     private boolean assessEndOfGame(Card p1Card, Card p2Card) {
         if (p1Card == null) {
-            System.out.println("Player 1 lost");
+            System.out.println("Player 1 lost in " + counter + " turns. ");
             return true;
         }
         if (p2Card == null) {
-            System.out.println("Player 2 lost");
+            System.out.println("Player 2 lost in " + counter + " turns. ");
             return true;
         }
         return false;
@@ -131,6 +133,7 @@ public class WarGame {
             table.add(p2Card);
             table.add(p1Card);
         }
+        counter++;
     }
 
 
