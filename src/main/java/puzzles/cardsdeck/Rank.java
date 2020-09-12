@@ -2,7 +2,6 @@ package puzzles.cardsdeck;
 
 public enum Rank {
 
-    ACE,
     DEUCE,
     THREE,
     FOUR,
@@ -14,6 +13,7 @@ public enum Rank {
     TEN,
     JACK,
     QUEEN,
-    KING
+    KING,
+    ACE
 
 }
