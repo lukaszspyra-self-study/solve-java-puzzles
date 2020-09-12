@@ -27,10 +27,6 @@ public class WarGame {
     public static void main(String[] args) {
         WarGame game = new WarGame();
         game.begin();
-
-        showPlayersCards(game.player1);
-
-        showPlayersCards(game.player2);
     }
 
     private void begin() {
@@ -42,13 +38,13 @@ public class WarGame {
     }
 
     private void displayPlayersHands() {
+
         Scanner in = new Scanner(System.in);
-        System.out.println("Player 1 hand: ");
-        showPlayersCards(player1);
-        System.out.println("\n\n");
-        System.out.println("Player 2 hand: ");
-        showPlayersCards(player2);
-        System.out.print("Press ENTER to begin: ");
+        System.out.println("\nPlayer 1 hand: ");
+        showPlayerCards(player1);
+        System.out.println("\nPlayer 2 hand: ");
+        showPlayerCards(player2);
+        System.out.print("\nPress ENTER to begin: ");
         in.nextLine();
     }
 
@@ -64,7 +60,7 @@ public class WarGame {
 
             putCardsOnTable(p1Card, p2Card);
 
-            if (compareCards(p1Card, p2Card)){
+            if (compareCards(p1Card, p2Card)) {
                 break;
             }
         }
@@ -74,20 +70,28 @@ public class WarGame {
     private boolean compareCards(Card p1Card, Card p2Card) {
 
         if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()) {
+            showFightingCards(p1Card, p2Card, "Player 1");
             passCardsToWinner(true, player1);
 
         } else if (p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()) {
+            showFightingCards(p1Card, p2Card, "Player 2");
             passCardsToWinner(false, player2);
 
         } else {
-            return war();
+            return war(p1Card, p2Card);
 
         }
         return false;
     }
 
-    private boolean war() {
+    private void showFightingCards(Card p1Card, Card p2Card, String player) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Player 1 card: ").append(p1Card.toString()).append(" - against - Player 2 card: ").append(p2Card.toString()).append(" ----> The winner is: ").append(player);
+        System.out.println(builder);
+    }
 
+    private boolean war(Card p1Card, Card p2Card) {
+        showFightingCards(p1Card, p2Card, "WAR!");
         Card p1BlindCard = takeCard(player1);
         Card p2BlindCard = takeCard(player2);
         putCardsOnTable(p1BlindCard, p2BlindCard);
@@ -104,7 +108,7 @@ public class WarGame {
     }
 
     private Card takeCard(Player player1) {
-        return player1.getHand().peekLast();
+        return player1.getHand().pollLast();
     }
 
     private boolean assessEndOfGame(Card p1Card, Card p2Card) {
@@ -130,7 +134,7 @@ public class WarGame {
     }
 
 
-    private static void showPlayersCards(Player player) {
+    private static void showPlayerCards(Player player) {
 
         for (var card : player.getHand()) {
 
