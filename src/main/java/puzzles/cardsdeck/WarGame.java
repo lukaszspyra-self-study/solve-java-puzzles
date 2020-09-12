@@ -4,18 +4,34 @@ import java.util.Random;
 
 public class WarGame {
 
+    private static Player player1;
+    private static Player player2;
+
     public static void main(String[] args) {
         Deck deck = new Deck();
         shuffle(deck);
-        displayDeck(deck);
+        play(deck);
+        showPlayersCards(player1);
+        System.out.println("\n\n\n\n");
+        showPlayersCards(player2);
 
     }
 
     private static void play(Deck deck){
-
-        Player player1 = new Player();
-        Player player2 = new Player();
+        player1 = new Player();
+        player2 = new Player();
         distributeCards(deck, player1, player2);
+
+    }
+
+
+    private static void showPlayersCards(Player player){
+
+        for (var card : player.getHand()){
+
+            System.out.println(card.toString());
+
+        }
 
     }
 
