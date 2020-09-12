@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class Player {
 
-    private Deque<Card> hand = new ArrayDeque<>();
+    private Deque<Card> hand = new ArrayDeque<>(26);
 
     public Deque<Card> getHand() {
         return hand;

@@ -4,30 +4,33 @@ import java.util.Random;
 
 public class WarGame {
 
-    private static Player player1;
-    private static Player player2;
+    private Deck deck;
+    private Player player1;
+    private Player player2;
+
 
     public static void main(String[] args) {
-        Deck deck = new Deck();
-        shuffle(deck);
-        play(deck);
-        showPlayersCards(player1);
+        WarGame game = new WarGame();
+        game.play();
+
+        showPlayersCards(game.player1);
         System.out.println("\n\n\n\n");
-        showPlayersCards(player2);
+        showPlayersCards(game.player2);
 
     }
 
-    private static void play(Deck deck){
+    private void play() {
+        deck = new Deck();
         player1 = new Player();
         player2 = new Player();
+        shuffle(deck);
         distributeCards(deck, player1, player2);
-
     }
 
 
-    private static void showPlayersCards(Player player){
+    private static void showPlayersCards(Player player) {
 
-        for (var card : player.getHand()){
+        for (var card : player.getHand()) {
 
             System.out.println(card.toString());
 
@@ -35,10 +38,10 @@ public class WarGame {
 
     }
 
-    private static void distributeCards(Deck deck, Player player1, Player player2) {
+    private void distributeCards(Deck deck, Player player1, Player player2) {
         for (int i = 0; i < deck.getCards().length; i++) {
 
-            if (i % 2 == 0){
+            if (i % 2 == 0) {
 
                 player1.getHand().add(deck.getCards()[i]);
 
@@ -60,11 +63,9 @@ public class WarGame {
     }
 
 
-    public static void shuffle(Deck deck) {
+    public void shuffle(Deck deck) {
         final Random random = new Random();
         Card[] cards = deck.getCards();
-
-        Card[] cards1 = deck.getCards();
 
         for (int i = 0; i < 777; i++) {
 
