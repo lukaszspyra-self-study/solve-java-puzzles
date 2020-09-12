@@ -2,7 +2,7 @@ package puzzles.cardsdeck;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class WarGame {
 
@@ -10,7 +10,9 @@ public class WarGame {
     private final Player player1;
     private final Player player2;
     private boolean player1Turn;
-    private List<Card> table;
+    private final List<Card> table;
+    private final GameAssistant gameAssistant;
+
 
     public WarGame() {
         deck = new Deck();
@@ -18,6 +20,8 @@ public class WarGame {
         player2 = new Player();
         player1Turn = true;
         table = new ArrayList<>();
+        gameAssistant = new GameAssistant();
+
     }
 
     public static void main(String[] args) {
@@ -25,14 +29,27 @@ public class WarGame {
         game.begin();
 
         showPlayersCards(game.player1);
-        System.out.println("\n\n\n\n");
+
         showPlayersCards(game.player2);
     }
 
     private void begin() {
-        shuffle(deck);
-        distributeCards(deck, player1, player2);
+        gameAssistant.shuffle(deck);
+        gameAssistant.distributeCards(deck, player1, player2);
+
+        displayPlayersHands();
         play();
+    }
+
+    private void displayPlayersHands() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Player 1 hand: ");
+        showPlayersCards(player1);
+        System.out.println("\n\n");
+        System.out.println("Player 2 hand: ");
+        showPlayersCards(player2);
+        System.out.print("Press ENTER to begin: ");
+        in.nextLine();
     }
 
     private void play() {
@@ -47,9 +64,11 @@ public class WarGame {
 
             putCardsOnTable(p1Card, p2Card);
 
-            if (compareCards(p1Card, p2Card)) break;
-
+            if (compareCards(p1Card, p2Card)){
+                break;
+            }
         }
+
     }
 
     private boolean compareCards(Card p1Card, Card p2Card) {
@@ -61,16 +80,19 @@ public class WarGame {
             passCardsToWinner(false, player2);
 
         } else {
-            Card p1BlindCard = takeCard(player1);
-            Card p2BlindCard = takeCard(player2);
-
-            if (assessEndOfGame(p1BlindCard, p2BlindCard)) {
-                return true;
-            }
-            putCardsOnTable(p1Card, p2Card);
+            return war();
 
         }
         return false;
+    }
+
+    private boolean war() {
+
+        Card p1BlindCard = takeCard(player1);
+        Card p2BlindCard = takeCard(player2);
+        putCardsOnTable(p1BlindCard, p2BlindCard);
+
+        return assessEndOfGame(p1BlindCard, p2BlindCard);
     }
 
     private void passCardsToWinner(boolean b, Player player1) {
@@ -87,11 +109,14 @@ public class WarGame {
 
     private boolean assessEndOfGame(Card p1Card, Card p2Card) {
         if (p1Card == null) {
-            //player1 lost
+            System.out.println("Player 1 lost");
             return true;
         }
-        //player2 lost
-        return p2Card == null;
+        if (p2Card == null) {
+            System.out.println("Player 2 lost");
+            return true;
+        }
+        return false;
     }
 
     private void putCardsOnTable(Card p1Card, Card p2Card) {
@@ -110,45 +135,6 @@ public class WarGame {
         for (var card : player.getHand()) {
 
             System.out.println(card.toString());
-
-        }
-    }
-
-    private void distributeCards(Deck deck, Player player1, Player player2) {
-        for (int i = 0; i < deck.getCards().length; i++) {
-
-            if (i % 2 == 0) {
-
-                player1.getHand().add(deck.getCards()[i]);
-
-            } else {
-
-                player2.getHand().add(deck.getCards()[i]);
-            }
-        }
-    }
-
-    private static void displayDeck(Deck deck) {
-        for (int i = 0; i < deck.getCards().length; i++) {
-
-            System.out.println(deck.getCards()[i].toString());
-
-        }
-    }
-
-    public void shuffle(Deck deck) {
-        final Random random = new Random();
-        Card[] cards = deck.getCards();
-
-        for (int i = 0; i < 777; i++) {
-
-            int firstRnd = random.nextInt(52);
-            int secondRnd = random.nextInt(52);
-
-            final Card tempCard = cards[firstRnd];
-            cards[firstRnd] = cards[secondRnd];
-            cards[secondRnd] = tempCard;
-
         }
     }
 }
