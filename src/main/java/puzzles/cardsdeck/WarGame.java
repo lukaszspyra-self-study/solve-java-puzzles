@@ -6,10 +6,19 @@ import java.util.Random;
 
 public class WarGame {
 
-    private Deck deck;
-    private Player player1;
-    private Player player2;
+    private final Deck deck;
+    private final Player player1;
+    private final Player player2;
+    private boolean player1Turn;
+    private List<Card> table;
 
+    public WarGame() {
+        deck = new Deck();
+        player1 = new Player();
+        player2 = new Player();
+        player1Turn = true;
+        table = new ArrayList<>();
+    }
 
     public static void main(String[] args) {
         WarGame game = new WarGame();
@@ -18,94 +27,81 @@ public class WarGame {
         showPlayersCards(game.player1);
         System.out.println("\n\n\n\n");
         showPlayersCards(game.player2);
-
     }
 
     private void begin() {
-        deck = new Deck();
-        player1 = new Player();
-        player2 = new Player();
         shuffle(deck);
         distributeCards(deck, player1, player2);
         play();
-
     }
 
     private void play() {
 
-        List<Card> table = new ArrayList<>();
-        boolean player1Turn = true;
-
         while (true) {
+            Card p1Card = takeCard(player1);
+            Card p2Card = takeCard(player2);
 
-            Card p1Card = player1.getHand().peekLast();
-            Card p2Card = player2.getHand().peekLast();
-
-            if (p1Card == null) {
-                //player1 lost
+            if (assessEndOfGame(p1Card, p2Card)) {
                 break;
             }
-            if (p2Card == null) {
-                //player2 lost
-                break;
 
-            }
+            putCardsOnTable(p1Card, p2Card);
 
-            if (player1Turn) {
-                table.add(p1Card);
-                table.add(p2Card);
-            } else {
-                table.add(p2Card);
-                table.add(p1Card);
-            }
-
-
-            if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()) {
-
-                player1Turn = true;
-                for (Card card : table) {
-                    player1.getHand().offerFirst(card);
-                }
-                table.clear();
-
-            } else if (p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()) {
-
-                player1Turn = false;
-
-                for (Card card : table) {
-                    player2.getHand().offerFirst(card);
-                }
-                table.clear();
-
-            } else {
-
-                Card p1BlindCard = player1.getHand().peekLast();
-                Card p2BlindCard = player2.getHand().peekLast();
-
-                if (p1BlindCard == null) {
-                    //player1 lost
-                    break;
-                }
-                if (p2BlindCard == null) {
-                    //player2 lost
-                    break;
-
-                }
-
-                if (player1Turn) {
-                    table.add(p1Card);
-                    table.add(p2Card);
-                } else {
-                    table.add(p2Card);
-                    table.add(p1Card);
-                }
-
-
-            }
-
+            if (compareCards(p1Card, p2Card)) break;
 
         }
+    }
 
+    private boolean compareCards(Card p1Card, Card p2Card) {
+
+        if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()) {
+            passCardsToWinner(true, player1);
+
+        } else if (p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()) {
+            passCardsToWinner(false, player2);
+
+        } else {
+            Card p1BlindCard = takeCard(player1);
+            Card p2BlindCard = takeCard(player2);
+
+            if (assessEndOfGame(p1BlindCard, p2BlindCard)) {
+                return true;
+            }
+            putCardsOnTable(p1Card, p2Card);
+
+        }
+        return false;
+    }
+
+    private void passCardsToWinner(boolean b, Player player1) {
+        player1Turn = b;
+        for (Card card : table) {
+            player1.getHand().offerFirst(card);
+        }
+        table.clear();
+    }
+
+    private Card takeCard(Player player1) {
+        return player1.getHand().peekLast();
+    }
+
+    private boolean assessEndOfGame(Card p1Card, Card p2Card) {
+        if (p1Card == null) {
+            //player1 lost
+            return true;
+        }
+        //player2 lost
+        return p2Card == null;
+    }
+
+    private void putCardsOnTable(Card p1Card, Card p2Card) {
+        if (player1Turn) {
+            table.add(p1Card);
+            table.add(p2Card);
+        } else {
+            table.add(p2Card);
+            table.add(p1Card);
+        }
     }
 
 
@@ -116,7 +112,6 @@ public class WarGame {
             System.out.println(card.toString());
 
         }
-
     }
 
     private void distributeCards(Deck deck, Player player1, Player player2) {
@@ -133,16 +128,13 @@ public class WarGame {
         }
     }
 
-
     private static void displayDeck(Deck deck) {
         for (int i = 0; i < deck.getCards().length; i++) {
 
             System.out.println(deck.getCards()[i].toString());
 
-
         }
     }
-
 
     public void shuffle(Deck deck) {
         final Random random = new Random();
@@ -158,8 +150,5 @@ public class WarGame {
             cards[secondRnd] = tempCard;
 
         }
-
-
     }
-
 }
