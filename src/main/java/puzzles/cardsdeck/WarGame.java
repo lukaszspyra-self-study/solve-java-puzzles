@@ -1,7 +1,6 @@
 package puzzles.cardsdeck;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,30 +34,72 @@ public class WarGame {
     private void play() {
 
         List<Card> table = new ArrayList<>();
+        boolean player1Turn = true;
 
-        while (true){
+        while (true) {
 
             Card p1Card = player1.getHand().peekLast();
             Card p2Card = player2.getHand().peekLast();
 
-            table.add(p1Card);
-            table.add(p2Card);
+            if (p1Card == null) {
+                //player1 lost
+                break;
+            }
+            if (p2Card == null) {
+                //player2 lost
+                break;
 
-            if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()){
+            }
 
-                player1.getHand().offerFirst(table.get(1));
-                player1.getHand().offerFirst(table.get(0));
+            if (player1Turn) {
+                table.add(p1Card);
+                table.add(p2Card);
+            } else {
+                table.add(p2Card);
+                table.add(p1Card);
+            }
+
+
+            if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()) {
+
+                player1Turn = true;
+                for (Card card : table) {
+                    player1.getHand().offerFirst(card);
+                }
                 table.clear();
 
-            } else if(p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()){
+            } else if (p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()) {
 
-                player2.getHand().offerFirst(table.get(1));
-                player2.getHand().offerFirst(table.get(0));
+                player1Turn = false;
+
+                for (Card card : table) {
+                    player2.getHand().offerFirst(card);
+                }
                 table.clear();
 
             } else {
-//TODO:implement WAR part
-                break;
+
+                Card p1BlindCard = player1.getHand().peekLast();
+                Card p2BlindCard = player2.getHand().peekLast();
+
+                if (p1BlindCard == null) {
+                    //player1 lost
+                    break;
+                }
+                if (p2BlindCard == null) {
+                    //player2 lost
+                    break;
+
+                }
+
+                if (player1Turn) {
+                    table.add(p1Card);
+                    table.add(p2Card);
+                } else {
+                    table.add(p2Card);
+                    table.add(p1Card);
+                }
+
 
             }
 
