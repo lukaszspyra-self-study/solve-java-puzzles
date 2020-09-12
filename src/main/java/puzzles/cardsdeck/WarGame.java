@@ -1,5 +1,8 @@
 package puzzles.cardsdeck;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class WarGame {
@@ -11,7 +14,7 @@ public class WarGame {
 
     public static void main(String[] args) {
         WarGame game = new WarGame();
-        game.play();
+        game.begin();
 
         showPlayersCards(game.player1);
         System.out.println("\n\n\n\n");
@@ -19,12 +22,49 @@ public class WarGame {
 
     }
 
-    private void play() {
+    private void begin() {
         deck = new Deck();
         player1 = new Player();
         player2 = new Player();
         shuffle(deck);
         distributeCards(deck, player1, player2);
+        play();
+
+    }
+
+    private void play() {
+
+        List<Card> table = new ArrayList<>();
+
+        while (true){
+
+            Card p1Card = player1.getHand().peekLast();
+            Card p2Card = player2.getHand().peekLast();
+
+            table.add(p1Card);
+            table.add(p2Card);
+
+            if (p1Card.getRank().getHierarchy() > p2Card.getRank().getHierarchy()){
+
+                player1.getHand().offerFirst(table.get(1));
+                player1.getHand().offerFirst(table.get(0));
+                table.clear();
+
+            } else if(p1Card.getRank().getHierarchy() < p2Card.getRank().getHierarchy()){
+
+                player2.getHand().offerFirst(table.get(1));
+                player2.getHand().offerFirst(table.get(0));
+                table.clear();
+
+            } else {
+//TODO:implement WAR part
+                break;
+
+            }
+
+
+        }
+
     }
 
 

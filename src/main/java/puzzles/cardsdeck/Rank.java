@@ -21,4 +21,8 @@ public enum Rank {
     Rank(int hierarchy) {
         this.hierarchy = hierarchy;
     }
+
+    public int getHierarchy() {
+        return hierarchy;
+    }
 }
