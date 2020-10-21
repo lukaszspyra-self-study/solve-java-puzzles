@@ -8,9 +8,13 @@ public class Casting {
         }
 
     private static void loosingData() {
-        int big = 1234567899;
+        int big = 123456799;
         float approx = big;
         System.out.println(big - (int)approx);
+
+        int small = 128;
+        byte narrowedByte = (byte) small;
+        System.out.println(narrowedByte);
     }
 
     private static void widening() {
