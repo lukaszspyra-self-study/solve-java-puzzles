@@ -1,6 +1,6 @@
 package epam;
 
-public class Casting {
+public final class Casting {
 
         public static void main(String[] args) {
             loosingData();
@@ -8,13 +8,19 @@ public class Casting {
         }
 
     private static void loosingData() {
-        int big = 123456799;
-        float approx = big;
+        int big = 1234567999;
+        double approx = big;
         System.out.println(big - (int)approx);
 
         int small = 128;
         byte narrowedByte = (byte) small;
+        char a = 'a';
+
         System.out.println(narrowedByte);
+
+        float f = 0.27f;
+        double d2 = f;
+        double d3 = 0.27d;
     }
 
     private static void widening() {

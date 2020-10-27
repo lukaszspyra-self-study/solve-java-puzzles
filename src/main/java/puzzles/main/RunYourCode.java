@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Hello world!
  */
-public class RunYourCode {
+public class RunYourCode  {
 
 
     public static void main(String[] args) {
@@ -17,9 +17,11 @@ public class RunYourCode {
 
         System.out.println(Arrays.toString(test1));
 
+       Class clasaA = Class.class;
+
     }
 
-    static void triple(Integer[] integers){
+    protected static void triple(Integer[] integers){
 
         integers[1] = 2*integers[1];
         integers = new Integer[]{1};
